@@ -20,7 +20,7 @@ Make sure you are in the source file.
 npm run start
 ```
 
-For truffle tests and console please consult the official Truffle documentaion for updates.
+For truffle tests and console please consult the official Truffle documentation for updates.
 
 
 
