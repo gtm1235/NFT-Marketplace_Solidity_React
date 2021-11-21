@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Web3 from 'web3';
 import detectEthereumProvider from "@metamask/detect-provider";
 import KryptoBird from '../abis/KryptoBird.json';
+import './App.css';
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardImage, MDBCardText, MDBBtn } from 'mdb-react-ui-kit';
 //import { ThemeProvider } from "react-bootstrap";
 
 class App extends Component {
@@ -64,7 +66,7 @@ class App extends Component {
 
     // with minting we are sending information and we need to specify the account
     mint = (kryptoBird) => {
-        
+
         this.state.contract.methods.mint(kryptoBird).send({ from: this.state.account[0] })
             .once('receipt', (receipt) => {
                 this.setState({
@@ -88,12 +90,12 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className='container-filled'>
                 {console.log(this.state.kryptoBirds)}
                 <nav className='navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow'>
                     <div className='navbar-brand col-sm-3 col-md-3 mr-0'
                         style={{ color: 'white' }}>
-                        KryptoBirdz NFTs (Non-fungible tokens)
+                        Gennaro's NFTs (Non-fungible tokens)
                     </div>
                     <ul className="navbar-nav px-3">
                         <li className='nav-item text-nowrap d-none d-sm-none d-sm-block'>
@@ -111,7 +113,7 @@ class App extends Component {
                             <div className='content mr-auto ml-auto'
                                 style={{ opacity: '0.8' }}>
                                 <h1 style={{ color: 'white' }}>
-                                    KryptoBirdz NFT Marketplace</h1>
+                                    Gennaro's NFT Marketplace</h1>
 
                                 <form onSubmit={(event) => {
                                     event.preventDefault();
@@ -129,17 +131,46 @@ class App extends Component {
                                         style={{ margin: '6px' }}
                                         type="submit"
                                         className='btn btn-primary btn-black'
-                                        defaultValue="Mint"
+                                        value="Mint"
                                     />
 
                                 </form>
                             </div>
                         </main>
-
+                    </div>
+                    <hr />
+                    <div className='row text-center'>
+                        {this.state.kryptoBirds.map((kryptoBird, key=kryptoBird) => {
+                            return (
+                                <div>
+                                    <div>
+                                        <MDBCard
+                                            className='token img'
+                                            style={{ maxWidth: '22rem' }}>
+                                        <MDBCardImage
+                                            src={kryptoBird}
+                                            position='top'
+                                            style={{ marginRight: '4px' }}
+                                            height='250rem'
+                                             />
+                                        <MDBCardBody>
+                                            <MDBCardTitle>
+                                                KryptoBirdz
+                                            </MDBCardTitle>
+                                            <MDBCardText>
+                                                The KryptoBirdz are 20 uniquely generated birds from the galaxy Mystipia.
+                                                There is only one of each bird and owned by a single person  on the Ethereum 
+                                                Blockchain.
+                                            </MDBCardText>
+                                            <MDBBtn href={kryptoBird}>Download</MDBBtn>
+                                        </MDBCardBody>
+                                        </MDBCard>
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
-
-
             </div >
         )
     }
